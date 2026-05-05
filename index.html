@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeva Alchikh | Smart Business Automations</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #007AFF;
+            --dark: #1d1d1f;
+            --light: #f5f5f7;
+            --success: #28a745;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
+        body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
+
+        header {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: radial-gradient(circle at center, #ffffff 0%, #e8e8e8 100%);
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
+        h1 { font-size: 3rem; margin-bottom: 20px; }
+        .highlight { color: var(--primary); }
+        
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: -80px auto 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: #fafafa;
+        }
+
+        .btn {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover { background-color: #0062cc; transform: translateY(-2px); }
+        .btn:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        /* Status Meldungen */
+        #status-success { display: none; color: var(--success); text-align: center; font-weight: bold; padding: 20px; }
+        #status-error { display: none; color: #dc3545; text-align: center; font-weight: bold; padding: 20px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card { padding: 30px; background: white; border-radius: 20px; text-align: center; }
+        .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
+
+        #impressum { padding: 60px 20px; background: #fff; border-top: 1px solid #ddd; font-size: 0.85rem; color: #666; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Business <span class="highlight">Automatisierung</span> neu gedacht.</h1>
+        <p style="font-size: 1.2rem; color: #86868b;">Ich baue Systeme, die für Sie arbeiten. 24/7.</p>
+    </header>
+
+    <section class="container">
+        <div class="contact-form">
+            <h2 style="margin-bottom: 25px; text-align: center;">Schreib mir eine Nachricht</h2>
+            
+            <!-- Erfolgs- und Fehlermeldungen[span_1](start_span)[span_1](end_span) -->
+            <div id="status-success" data-fs-success>Vielen Dank! Deine Nachricht wurde erfolgreich gesendet.</div>
+            <div id="status-error" data-fs-error>Hoppla! Da gab es ein Problem. Bitte versuche es erneut.</div>
+
+            <form id="my-form">
+                <label for="email">Deine E-Mail-Adresse:</label>
+                <input type="email" id="email" name="email" placeholder="name@domain.com" required data-fs-field>
+                
+                <label for="message">Deine Nachricht:</label>
+                <textarea id="message" name="message" rows="5" placeholder="Wie kann ich helfen?" required data-fs-field></textarea>
+                
+                <button type="submit" id="submit-btn" class="btn" data-fs-submit-btn>Nachricht senden</button>
+            </form>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-bolt"></i>
+                <h3>Effizienz</h3>
+                <p>Sparen Sie Zeit durch intelligente Workflows.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-microchip"></i>
+                <h3>KI-Integration</h3>
+                <p>Nutzen Sie modernste KI für Ihre Kundenkommunikation.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="impressum">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h3 style="color: #1d1d1f; margin-bottom: 10px;">Impressum</h3>
+            <p><strong>Yeva Alchikh</strong><br>
+            Langer Anger 169<br>
+            69115 Heidelberg<br>
+            E-Mail: <a href="mailto:info@yeva-automation.de" style="color: var(--primary); text-decoration: none;">info@yeva-automation.de</a></p>
+            <br>
+            <p>©️ 2026 Yeva Alchikh - Automation Solutions.</p>
+        </div>
+    </footer>
+
+    <!-- Formspree AJAX Script[span_2](start_span)[span_2](end_span) -->
+    <script>
+      window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+      formspree('initForm', { 
+        formElement: '#my-form', 
+        formId: 'xpqbdnoa',
+        onSuccess: function() {
+          document.getElementById('my-form').style.display = 'none';
+          document.getElementById('status-success').style.display = 'block';
+        }
+      });
+    </script>
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+</body>
+</html>
